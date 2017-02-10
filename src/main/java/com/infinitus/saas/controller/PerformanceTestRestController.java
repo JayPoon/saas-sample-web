@@ -52,5 +52,27 @@ public class PerformanceTestRestController
         return ret;
     }
 
+    @RequestMapping(value={"/memidle"}, method={RequestMethod.GET})
+    public @ResponseBody String memIdle(int mb, int holdtime )
+    {
+        long res = 0;
+        long st = System.currentTimeMillis();
+        long et = System.currentTimeMillis() - st;
+
+        int MB = 1024 * 1024;
+        int size = mb * MB;
+        byte[] cache = new byte[MB];
+
+
+        try {
+            Thread.sleep(holdtime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return "Total size: " + size + "mb | hold time:" + holdtime +" ms" ;
+
+    }
+
 
 }
