@@ -29,21 +29,27 @@ public class PerformanceTestRestController
         long st = System.currentTimeMillis();
         for (int i = 0; i < outloop; i++) {
             for (int j = 0; j < innerloop; j++) {
-
-                res = res + i * j;
-
+                res += accumulate(innerloop);
             }
 
-//            try {
-//                Thread.sleep(10);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         long et = System.currentTimeMillis() - st;
 
-        return "Total spent: " + et + "ms";
+        return "Total spent: " + et + "ms" + "res:" + res;
 
+    }
+
+   private long accumulate(long max) {
+        long ret = 0;
+        for(long i = 1; i <= max; i++) {
+            ret += i;
+        }
+        return ret;
     }
 
 
