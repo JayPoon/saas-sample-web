@@ -25,16 +25,20 @@ public class PerformanceTestRestController
     @RequestMapping(value={"/cpuidle"}, method={RequestMethod.GET})
     public @ResponseBody String cpuIdle(int outloop , int innerloop)
     {
+        long res = 0;
         long st = System.currentTimeMillis();
         for (int i = 0; i < outloop; i++) {
             for (int j = 0; j < innerloop; j++) {
+
+                res = res + i * j;
+
             }
 
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
         long et = System.currentTimeMillis() - st;
 
